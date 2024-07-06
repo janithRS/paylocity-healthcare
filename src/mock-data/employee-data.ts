@@ -50,4 +50,10 @@ export const initialEmployees: Employee[] = [
       },
     ],
   },
+  {
+    id: uuidv4(),
+    name: "Michael Doe",
+    phone: "1234567890",
+    dependents: [],
+  },
 ];
