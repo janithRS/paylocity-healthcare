@@ -54,7 +54,7 @@ export const EmployeeCard: FC<EmployeeCardProps> = ({
           <div className="flex flex-row items-center justify-between w-full mb-2">
             <div className="flex flex-col">
               <div>
-                <span className="font-semibold">{employee.name} </span>·{" "}
+                <span className="text-xl font-semibold">{employee.name} </span>·{" "}
                 <span className="text-gray-400">
                   #{employee.id.slice(0, 8)}
                 </span>
@@ -94,7 +94,7 @@ export const EmployeeCard: FC<EmployeeCardProps> = ({
         <hr className="h-px bg-gray-200 border-0 dark:bg-gray-700" />
         <CardContent className="text-sm pt-4">
           <div className="flex flex-row justify-between mb-6">
-            <h3 className="text-lg font-bold">Dependents</h3>
+            <h3 className="text-lg font-semibold">Dependents</h3>
             <div className="flex flex-row gap-2">
               <AddButton onClick={() => setIsAddDependentDialogOpen(true)} />
               {employee.dependents?.length > 0 && (
