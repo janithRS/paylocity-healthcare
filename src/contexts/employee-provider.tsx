@@ -7,20 +7,24 @@ export interface EmployeeContextDefinition {
   employees: Employee[];
   editEmployee: (id: string, updatedEmployee: Partial<Employee>) => void;
   addEmployee: (newEmployee: Employee) => void;
+  deleteEmployee: (id: string) => void;
   addDependent: (empId: string, newDependent: Dependent) => void;
   editDependent: (
     empId: string,
     dependentId: string,
     updatedDependent: Partial<Dependent>
   ) => void;
+  deleteDependent: (empId: string, dependentId: string) => void;
 }
 
 const initState: EmployeeContextDefinition = {
   employees: initialEmployees,
   editEmployee: () => {},
   addEmployee: () => {},
+  deleteEmployee: () => {},
   addDependent: () => {},
   editDependent: () => {},
+  deleteDependent: () => {},
 };
 
 export const EmployeeContext =
@@ -42,6 +46,12 @@ export const EmployeeProvider: FC<EmployeeProviderProps> = ({ children }) => {
       prevEmployees.map((emp) =>
         emp.id === id ? { ...emp, ...updatedEmployee } : emp
       )
+    );
+  };
+
+  const deleteEmployee = (id: string) => {
+    setEmployees((prevEmployees) =>
+      prevEmployees.filter((emp) => emp.id !== id)
     );
   };
 
@@ -77,14 +87,29 @@ export const EmployeeProvider: FC<EmployeeProviderProps> = ({ children }) => {
     }
   };
 
+  const deleteDependent = (empId: string, dependentId: string) => {
+    const emp = employees.find((emp) => emp.id === empId);
+
+    if (emp) {
+      emp.dependents = emp.dependents.filter((dep) => dep.id !== dependentId);
+      setEmployees((prevEmployees) =>
+        prevEmployees.map((emp) =>
+          emp.id === empId ? { ...emp, ...emp.dependents } : emp
+        )
+      );
+    }
+  };
+
   return (
     <EmployeeContext.Provider
       value={{
         employees,
         editEmployee,
         addEmployee,
+        deleteEmployee,
         addDependent,
         editDependent,
+        deleteDependent,
       }}
     >
       {children}

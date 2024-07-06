@@ -32,7 +32,7 @@ export const EditDependentDialog: FC<EditDependentDialogProps> = ({
   selectedEmployee,
   setIsOpen,
 }) => {
-  const { editDependent } = useEmployees();
+  const { editDependent, deleteDependent } = useEmployees();
 
   const [currentDependent, setCurrentDependent] = useState<Dependent | null>(
     null
@@ -50,6 +50,12 @@ export const EditDependentDialog: FC<EditDependentDialogProps> = ({
     );
     if (!dependent) return;
     setCurrentDependent(dependent);
+  };
+
+  const onDelete = () => {
+    if (!currentDependent) return;
+    deleteDependent(selectedEmployee.id, currentDependent.id);
+    setIsOpen(false);
   };
 
   return (
@@ -120,6 +126,12 @@ export const EditDependentDialog: FC<EditDependentDialogProps> = ({
           )}
         </div>
         <DialogFooter>
+          {currentDependent && (
+            <Button variant="destructive" onClick={() => onDelete()}>
+              Delete
+            </Button>
+          )}
+
           <Button variant="outline" onClick={() => setIsOpen(false)}>
             Cancel
           </Button>

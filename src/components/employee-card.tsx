@@ -5,6 +5,8 @@ import { EditButton } from "./buttons/edit-button";
 import { AddButton } from "./buttons/add-button";
 import { AddDependentDialog } from "./dialogs/add-dependent";
 import { EditDependentDialog } from "./dialogs/edit-dependent";
+import { DeleteButton } from "./buttons/delete-button";
+import { useEmployees } from "../hooks/useEmployees";
 
 export interface EmployeeCardProps {
   employee: Employee;
@@ -20,6 +22,8 @@ export const EmployeeCard: FC<EmployeeCardProps> = ({
   const [isEditDependentDialogOpen, setIsEditDependentDialogOpen] =
     useState(false);
 
+  const { deleteEmployee } = useEmployees();
+
   return (
     <>
       <Card className="w-full h-full cursor-pointer text-left rounded-xl shadow-none">
@@ -34,7 +38,10 @@ export const EmployeeCard: FC<EmployeeCardProps> = ({
               </div>
               <div className="text-gray-500">{employee?.phone}</div>
             </div>
-            <EditButton onClick={() => handleEditEmployee(employee)} />
+            <div className="flex flex-row gap-2">
+              <EditButton onClick={() => handleEditEmployee(employee)} />
+              <DeleteButton onClick={() => deleteEmployee(employee.id)} />
+            </div>
           </div>
         </CardHeader>
         <hr className="h-px bg-gray-200 border-0 dark:bg-gray-700" />
