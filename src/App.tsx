@@ -25,6 +25,7 @@ function App() {
         <h1 className="text-3xl font-bold leading-tight tracking-tighter mb-5">
           Employees
         </h1>
+
         <Button
           className="bg-emerald-600"
           onClick={() => setIsOpenAddEmployeeBox(true)}
