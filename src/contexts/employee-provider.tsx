@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useState,
-  FC,
-  ReactNode,
-  useEffect,
-} from "react";
+import { createContext, useState, FC, ReactNode, useEffect } from "react";
 import { Employee } from "../types/Employee";
 import { initialEmployees } from "../mock-data/employee-data";
 import { Dependent } from "../types/Dependent";
