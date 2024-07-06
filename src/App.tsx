@@ -34,7 +34,7 @@ function App() {
         </Button>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 grid-flow-row-dense gap-3">
-        {employeeList.map((employee: Employee) => (
+        {employeeList?.map((employee: Employee) => (
           <EmployeeCard
             key={employee.id}
             employee={employee}
