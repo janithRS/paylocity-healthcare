@@ -23,7 +23,7 @@ function App() {
     <div>
       <div className="flex flex-row justify-between">
         <h1 className="text-3xl font-bold leading-tight tracking-tighter mb-5">
-          Employees
+          Employee Healthcare Benefits
         </h1>
 
         <Button

@@ -1,4 +1,10 @@
-import React, { createContext, useState, FC, ReactNode } from "react";
+import React, {
+  createContext,
+  useState,
+  FC,
+  ReactNode,
+  useEffect,
+} from "react";
 import { Employee } from "../types/Employee";
 import { initialEmployees } from "../mock-data/employee-data";
 import { Dependent } from "../types/Dependent";
@@ -35,7 +41,14 @@ interface EmployeeProviderProps {
 }
 
 export const EmployeeProvider: FC<EmployeeProviderProps> = ({ children }) => {
-  const [employees, setEmployees] = useState<Employee[]>(initialEmployees);
+  const [employees, setEmployees] = useState<Employee[]>(() => {
+    const savedEmployees = localStorage.getItem("employees");
+    return savedEmployees ? JSON.parse(savedEmployees) : initialEmployees;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("employees", JSON.stringify(employees));
+  }, [employees]);
 
   const addEmployee = (newEmployee: Employee) => {
     setEmployees((prevEmployees) => [...prevEmployees, newEmployee]);
